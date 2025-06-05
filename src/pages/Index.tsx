@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Users, Calendar } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -144,13 +145,13 @@ const Index = () => {
   const upcomingVisits = visits.filter(v => v.status === 'planned');
 
   return (
-    <div className="min-h-screen bg-blue-800">
+    <div className="min-h-screen bg-blue-900">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="p-3 bg-yellow-500 rounded border-2 border-yellow-600">
-              <Users className="h-8 w-8 text-blue-900" />
+              <Users className="h-8 w-8 text-blue-950" />
             </div>
             <h1 className="text-5xl font-bold text-yellow-400 font-crimson">
               CorpsConnect
@@ -163,12 +164,12 @@ const Index = () => {
 
         {/* Current User Status */}
         {currentUser && (
-          <Card className="mb-8 border-2 border-yellow-500 bg-blue-700">
+          <Card className="mb-8 border-2 border-yellow-500 bg-blue-900">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   <Avatar className="h-12 w-12">
-                    <AvatarFallback className="bg-yellow-500 text-blue-900 font-bold">
+                    <AvatarFallback className="bg-yellow-500 text-blue-950 font-bold">
                       {getInitials(currentUser.name)}
                     </AvatarFallback>
                   </Avatar>
@@ -178,7 +179,7 @@ const Index = () => {
                     </div>
                     <div className="flex flex-wrap gap-1 mt-1">
                       {currentUser.organizations.map((org) => (
-                        <Badge key={org} className="bg-yellow-600 text-blue-900 text-xs border border-yellow-500">
+                        <Badge key={org} className="bg-yellow-600 text-blue-950 text-xs border border-yellow-500">
                           {org}
                         </Badge>
                       ))}
@@ -189,7 +190,7 @@ const Index = () => {
                   <Button 
                     variant="outline" 
                     onClick={() => setIsRegistering(true)}
-                    className="border-yellow-500 text-yellow-400 hover:bg-yellow-500 hover:text-blue-900"
+                    className="border-yellow-500 text-yellow-400 hover:bg-yellow-500 hover:text-blue-950"
                   >
                     Edit Profile
                   </Button>
@@ -231,7 +232,7 @@ const Index = () => {
 
             {/* Who's in Town */}
             <div className="grid lg:grid-cols-2 gap-6 mb-8">
-              <Card className="border-2 border-yellow-500 bg-blue-700">
+              <Card className="border-2 border-yellow-500 bg-blue-900">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-yellow-400 font-crimson">
                     <Users className="h-5 w-5" />
@@ -244,9 +245,9 @@ const Index = () => {
                   ) : (
                     <div className="space-y-3">
                       {currentVisits.map((visit) => (
-                        <div key={visit.id} className="flex items-center gap-3 p-3 bg-blue-600 rounded border border-yellow-500">
+                        <div key={visit.id} className="flex items-center gap-3 p-3 bg-blue-800 rounded border border-yellow-500">
                           <Avatar className="h-8 w-8">
-                            <AvatarFallback className="bg-yellow-500 text-blue-900 font-bold">
+                            <AvatarFallback className="bg-yellow-500 text-blue-950 font-bold">
                               {getInitials(visit.userName)}
                             </AvatarFallback>
                           </Avatar>
@@ -261,7 +262,7 @@ const Index = () => {
                 </CardContent>
               </Card>
 
-              <Card className="border-2 border-yellow-500 bg-blue-700">
+              <Card className="border-2 border-yellow-500 bg-blue-900">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-yellow-400 font-crimson">
                     <Calendar className="h-5 w-5" />
@@ -274,9 +275,9 @@ const Index = () => {
                   ) : (
                     <div className="space-y-3">
                       {upcomingVisits.slice(0, 5).map((visit) => (
-                        <div key={visit.id} className="flex items-center gap-3 p-3 bg-blue-600 rounded border border-yellow-500">
+                        <div key={visit.id} className="flex items-center gap-3 p-3 bg-blue-800 rounded border border-yellow-500">
                           <Avatar className="h-8 w-8">
-                            <AvatarFallback className="bg-yellow-500 text-blue-900 font-bold">
+                            <AvatarFallback className="bg-yellow-500 text-blue-950 font-bold">
                               {getInitials(visit.userName)}
                             </AvatarFallback>
                           </Avatar>

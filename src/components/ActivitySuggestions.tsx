@@ -46,7 +46,7 @@ const ActivitySuggestions = ({ currentUser, visits, suggestions, onAddSuggestion
 
   if (activeVisits.length === 0) {
     return (
-      <Card className="border-2 border-yellow-500 bg-blue-700">
+      <Card className="border-2 border-yellow-500 bg-blue-900">
         <CardContent className="text-center py-8">
           <Calendar className="h-12 w-12 text-yellow-400 mx-auto mb-2" />
           <p className="text-blue-200">No active visits to suggest activities for</p>
@@ -61,12 +61,12 @@ const ActivitySuggestions = ({ currentUser, visits, suggestions, onAddSuggestion
         const visitSuggestions = suggestions.filter(s => s.visitId === visit.id);
         
         return (
-          <Card key={visit.id} className="border-2 border-yellow-500 bg-blue-700">
+          <Card key={visit.id} className="border-2 border-yellow-500 bg-blue-900">
             <CardHeader>
               <CardTitle className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <Avatar className="h-8 w-8">
-                    <AvatarFallback className="bg-yellow-500 text-blue-900 text-sm font-bold">
+                    <AvatarFallback className="bg-yellow-500 text-blue-950 text-sm font-bold">
                       {getInitials(visit.userName)}
                     </AvatarFallback>
                   </Avatar>
@@ -82,7 +82,7 @@ const ActivitySuggestions = ({ currentUser, visits, suggestions, onAddSuggestion
                   <Button 
                     size="sm" 
                     onClick={() => setShowForm(visit.id)}
-                    className="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-semibold"
+                    className="bg-yellow-500 hover:bg-yellow-600 text-blue-950 font-semibold"
                   >
                     <Plus className="h-4 w-4 mr-1" />
                     Suggest Activity
@@ -92,14 +92,14 @@ const ActivitySuggestions = ({ currentUser, visits, suggestions, onAddSuggestion
             </CardHeader>
             <CardContent className="space-y-4">
               {showForm === visit.id && (
-                <div className="bg-blue-600 p-4 rounded border-2 border-yellow-500">
+                <div className="bg-blue-800 p-4 rounded border-2 border-yellow-500">
                   <div className="space-y-3">
                     <div>
                       <Input
                         placeholder="Activity title"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
-                        className="bg-blue-700 border-yellow-500 text-blue-100 placeholder:text-blue-300"
+                        className="bg-blue-900 border-yellow-500 text-blue-100 placeholder:text-blue-300"
                       />
                     </div>
                     <div>
@@ -107,7 +107,7 @@ const ActivitySuggestions = ({ currentUser, visits, suggestions, onAddSuggestion
                         placeholder="Description and details"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                        className="bg-blue-700 border-yellow-500 text-blue-100 placeholder:text-blue-300"
+                        className="bg-blue-900 border-yellow-500 text-blue-100 placeholder:text-blue-300"
                       />
                     </div>
                     <div>
@@ -115,7 +115,7 @@ const ActivitySuggestions = ({ currentUser, visits, suggestions, onAddSuggestion
                         type="date"
                         value={suggestedDate}
                         onChange={(e) => setSuggestedDate(e.target.value)}
-                        className="bg-blue-700 border-yellow-500 text-blue-100"
+                        className="bg-blue-900 border-yellow-500 text-blue-100"
                       />
                     </div>
                     <div className="flex gap-2">
@@ -123,7 +123,7 @@ const ActivitySuggestions = ({ currentUser, visits, suggestions, onAddSuggestion
                         onClick={() => handleSubmit(visit.id)}
                         disabled={!title.trim() || !description.trim()}
                         size="sm"
-                        className="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-semibold"
+                        className="bg-yellow-500 hover:bg-yellow-600 text-blue-950 font-semibold"
                       >
                         Add Suggestion
                       </Button>
@@ -131,7 +131,7 @@ const ActivitySuggestions = ({ currentUser, visits, suggestions, onAddSuggestion
                         variant="outline" 
                         onClick={() => setShowForm(null)}
                         size="sm"
-                        className="border-yellow-500 text-yellow-400 hover:bg-yellow-500 hover:text-blue-900"
+                        className="border-yellow-500 text-yellow-400 hover:bg-yellow-500 hover:text-blue-950"
                       >
                         Cancel
                       </Button>
@@ -144,10 +144,10 @@ const ActivitySuggestions = ({ currentUser, visits, suggestions, onAddSuggestion
                 <div className="space-y-3">
                   <h4 className="font-medium text-blue-200 font-crimson">Activity Suggestions:</h4>
                   {visitSuggestions.map((suggestion) => (
-                    <div key={suggestion.id} className="bg-blue-600 p-3 rounded border border-yellow-500">
+                    <div key={suggestion.id} className="bg-blue-800 p-3 rounded border border-yellow-500">
                       <div className="flex items-start gap-3">
                         <Avatar className="h-6 w-6">
-                          <AvatarFallback className="bg-yellow-500 text-blue-900 text-xs font-bold">
+                          <AvatarFallback className="bg-yellow-500 text-blue-950 text-xs font-bold">
                             {getInitials(suggestion.userName)}
                           </AvatarFallback>
                         </Avatar>

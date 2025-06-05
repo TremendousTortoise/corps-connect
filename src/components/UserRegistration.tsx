@@ -44,7 +44,7 @@ const UserRegistration = ({ onRegister, onCancel, existingUser }: UserRegistrati
   };
 
   return (
-    <Card className="border-2 border-yellow-500 bg-blue-700">
+    <Card className="border-2 border-yellow-500 bg-blue-900">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-yellow-400 font-crimson">
           <User className="h-6 w-6" />
@@ -60,7 +60,7 @@ const UserRegistration = ({ onRegister, onCancel, existingUser }: UserRegistrati
             placeholder="Enter your name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="bg-blue-600 border-yellow-500 text-blue-100 placeholder:text-blue-300"
+            className="bg-blue-800 border-yellow-500 text-blue-100 placeholder:text-blue-300"
           />
         </div>
 
@@ -72,7 +72,7 @@ const UserRegistration = ({ onRegister, onCancel, existingUser }: UserRegistrati
             placeholder="Tell your friends about yourself"
             value={bio}
             onChange={(e) => setBio(e.target.value)}
-            className="bg-blue-600 border-yellow-500 text-blue-100 placeholder:text-blue-300"
+            className="bg-blue-800 border-yellow-500 text-blue-100 placeholder:text-blue-300"
           />
         </div>
 
@@ -86,15 +86,15 @@ const UserRegistration = ({ onRegister, onCancel, existingUser }: UserRegistrati
               value={newOrg}
               onChange={(e) => setNewOrg(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && addOrganization()}
-              className="bg-blue-600 border-yellow-500 text-blue-100 placeholder:text-blue-300"
+              className="bg-blue-800 border-yellow-500 text-blue-100 placeholder:text-blue-300"
             />
-            <Button onClick={addOrganization} size="sm" className="bg-yellow-500 hover:bg-yellow-600 text-blue-900">
+            <Button onClick={addOrganization} size="sm" className="bg-yellow-500 hover:bg-yellow-600 text-blue-950">
               <Plus className="h-4 w-4" />
             </Button>
           </div>
           <div className="flex flex-wrap gap-2">
             {organizations.map((org) => (
-              <Badge key={org} className="bg-yellow-600 text-blue-900 border border-yellow-500 flex items-center gap-1">
+              <Badge key={org} className="bg-yellow-600 text-blue-950 border border-yellow-500 flex items-center gap-1">
                 {org}
                 <X 
                   className="h-3 w-3 cursor-pointer" 
@@ -109,7 +109,7 @@ const UserRegistration = ({ onRegister, onCancel, existingUser }: UserRegistrati
           <Button 
             onClick={handleSubmit}
             disabled={!name.trim()}
-            className="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-semibold"
+            className="bg-yellow-500 hover:bg-yellow-600 text-blue-950 font-semibold"
           >
             {existingUser ? "Update Profile" : "Create Account"}
           </Button>
@@ -117,7 +117,7 @@ const UserRegistration = ({ onRegister, onCancel, existingUser }: UserRegistrati
             <Button 
               variant="outline" 
               onClick={onCancel}
-              className="border-yellow-500 text-yellow-400 hover:bg-yellow-500 hover:text-blue-900"
+              className="border-yellow-500 text-yellow-400 hover:bg-yellow-500 hover:text-blue-950"
             >
               Cancel
             </Button>
