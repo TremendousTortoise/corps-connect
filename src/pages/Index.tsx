@@ -1,7 +1,6 @@
 
 import { useState, useEffect } from "react";
 import { Users, Calendar } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -141,6 +140,10 @@ const Index = () => {
     return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
   };
 
+  const getUserByVisit = (visit: Visit) => {
+    return users.find(u => u.id === visit.userId);
+  };
+
   const currentVisits = visits.filter(v => v.status === 'current');
   const upcomingVisits = visits.filter(v => v.status === 'planned');
 
@@ -164,47 +167,45 @@ const Index = () => {
 
         {/* Current User Status */}
         {currentUser && (
-          <Card className="mb-8 border-2 border-yellow-500 bg-blue-900">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <Avatar className="h-12 w-12">
-                    <AvatarFallback className="bg-yellow-500 text-blue-950 font-bold">
-                      {getInitials(currentUser.name)}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <div className="font-semibold text-yellow-400 font-crimson text-lg">
-                      Welcome back, {currentUser.name}!
-                    </div>
-                    <div className="flex flex-wrap gap-1 mt-1">
-                      {currentUser.organizations.map((org) => (
-                        <Badge key={org} className="bg-yellow-600 text-blue-950 text-xs border border-yellow-500">
-                          {org}
-                        </Badge>
-                      ))}
-                    </div>
+          <div className="mb-8 p-6 bg-blue-800 border-2 border-yellow-500 rounded">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <Avatar className="h-12 w-12">
+                  <AvatarFallback className="bg-yellow-500 text-blue-950 font-bold">
+                    {getInitials(currentUser.name)}
+                  </AvatarFallback>
+                </Avatar>
+                <div>
+                  <div className="font-semibold text-yellow-400 font-crimson text-lg">
+                    Welcome back, {currentUser.name}!
+                  </div>
+                  <div className="flex flex-wrap gap-1 mt-1">
+                    {currentUser.organizations.map((org) => (
+                      <Badge key={org} className="bg-yellow-600 text-blue-950 text-xs border border-yellow-500">
+                        {org}
+                      </Badge>
+                    ))}
                   </div>
                 </div>
-                <div className="flex gap-2">
-                  <Button 
-                    variant="outline" 
-                    onClick={() => setIsRegistering(true)}
-                    className="border-yellow-500 text-yellow-400 hover:bg-yellow-500 hover:text-blue-950"
-                  >
-                    Edit Profile
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    onClick={handleLogout}
-                    className="border-red-400 text-red-400 hover:bg-red-400 hover:text-white"
-                  >
-                    Logout
-                  </Button>
-                </div>
               </div>
-            </CardContent>
-          </Card>
+              <div className="flex gap-2">
+                <Button 
+                  variant="outline" 
+                  onClick={() => setIsRegistering(true)}
+                  className="border-yellow-500 text-yellow-400 hover:bg-yellow-500 hover:text-blue-950"
+                >
+                  Edit Profile
+                </Button>
+                <Button 
+                  variant="outline" 
+                  onClick={handleLogout}
+                  className="border-red-400 text-red-400 hover:bg-red-400 hover:text-white"
+                >
+                  Logout
+                </Button>
+              </div>
+            </div>
+          </div>
         )}
 
         {/* Registration Form */}
@@ -232,68 +233,84 @@ const Index = () => {
 
             {/* Who's in Town */}
             <div className="grid lg:grid-cols-2 gap-6 mb-8">
-              <Card className="border-2 border-yellow-500 bg-blue-900">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-yellow-400 font-crimson">
-                    <Users className="h-5 w-5" />
-                    Currently in Town ({currentVisits.length})
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {currentVisits.length === 0 ? (
-                    <p className="text-blue-200 text-center py-4">No one is currently in town</p>
-                  ) : (
-                    <div className="space-y-3">
-                      {currentVisits.map((visit) => (
-                        <div key={visit.id} className="flex items-center gap-3 p-3 bg-blue-800 rounded border border-yellow-500">
+              <div className="p-6 bg-blue-800 border-2 border-yellow-500 rounded">
+                <h3 className="flex items-center gap-2 text-yellow-400 font-crimson text-xl font-semibold mb-4">
+                  <Users className="h-5 w-5" />
+                  Currently in Town ({currentVisits.length})
+                </h3>
+                {currentVisits.length === 0 ? (
+                  <p className="text-blue-200 text-center py-4">No one is currently in town</p>
+                ) : (
+                  <div className="space-y-3">
+                    {currentVisits.map((visit) => {
+                      const user = getUserByVisit(visit);
+                      return (
+                        <div key={visit.id} className="flex items-center gap-3 p-3 bg-blue-900 rounded border border-yellow-500">
                           <Avatar className="h-8 w-8">
                             <AvatarFallback className="bg-yellow-500 text-blue-950 font-bold">
                               {getInitials(visit.userName)}
                             </AvatarFallback>
                           </Avatar>
-                          <div>
+                          <div className="flex-1">
                             <div className="font-medium text-yellow-400">{visit.userName}</div>
                             <div className="text-sm text-blue-200">Since {visit.startDate.toLocaleDateString()}</div>
+                            {user && user.organizations.length > 0 && (
+                              <div className="flex flex-wrap gap-1 mt-1">
+                                {user.organizations.map((org) => (
+                                  <Badge key={org} className="bg-yellow-600 text-blue-950 text-xs border border-yellow-500">
+                                    {org}
+                                  </Badge>
+                                ))}
+                              </div>
+                            )}
                           </div>
                         </div>
-                      ))}
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
 
-              <Card className="border-2 border-yellow-500 bg-blue-900">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-yellow-400 font-crimson">
-                    <Calendar className="h-5 w-5" />
-                    Upcoming Visits ({upcomingVisits.length})
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {upcomingVisits.length === 0 ? (
-                    <p className="text-blue-200 text-center py-4">No upcoming visits planned</p>
-                  ) : (
-                    <div className="space-y-3">
-                      {upcomingVisits.slice(0, 5).map((visit) => (
-                        <div key={visit.id} className="flex items-center gap-3 p-3 bg-blue-800 rounded border border-yellow-500">
+              <div className="p-6 bg-blue-800 border-2 border-yellow-500 rounded">
+                <h3 className="flex items-center gap-2 text-yellow-400 font-crimson text-xl font-semibold mb-4">
+                  <Calendar className="h-5 w-5" />
+                  Upcoming Visits ({upcomingVisits.length})
+                </h3>
+                {upcomingVisits.length === 0 ? (
+                  <p className="text-blue-200 text-center py-4">No upcoming visits planned</p>
+                ) : (
+                  <div className="space-y-3">
+                    {upcomingVisits.slice(0, 5).map((visit) => {
+                      const user = getUserByVisit(visit);
+                      return (
+                        <div key={visit.id} className="flex items-center gap-3 p-3 bg-blue-900 rounded border border-yellow-500">
                           <Avatar className="h-8 w-8">
                             <AvatarFallback className="bg-yellow-500 text-blue-950 font-bold">
                               {getInitials(visit.userName)}
                             </AvatarFallback>
                           </Avatar>
-                          <div>
+                          <div className="flex-1">
                             <div className="font-medium text-yellow-400">{visit.userName}</div>
                             <div className="text-sm text-blue-200">
                               {visit.startDate.toLocaleDateString()}
                               {visit.endDate && ` - ${visit.endDate.toLocaleDateString()}`}
                             </div>
+                            {user && user.organizations.length > 0 && (
+                              <div className="flex flex-wrap gap-1 mt-1">
+                                {user.organizations.map((org) => (
+                                  <Badge key={org} className="bg-yellow-600 text-blue-950 text-xs border border-yellow-500">
+                                    {org}
+                                  </Badge>
+                                ))}
+                              </div>
+                            )}
                           </div>
                         </div>
-                      ))}
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Activity Suggestions */}
