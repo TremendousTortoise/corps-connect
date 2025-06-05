@@ -44,40 +44,40 @@ const UserRegistration = ({ onRegister, onCancel, existingUser }: UserRegistrati
   };
 
   return (
-    <Card className="border-2 border-blue-200 bg-blue-50">
+    <Card className="border-2 border-yellow-500 bg-blue-700">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-blue-800">
+        <CardTitle className="flex items-center gap-2 text-yellow-400 font-crimson">
           <User className="h-6 w-6" />
           {existingUser ? "Update Profile" : "Create Account"}
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-blue-200 mb-2 font-crimson">
             Your Name *
           </label>
           <Input
             placeholder="Enter your name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="bg-white"
+            className="bg-blue-600 border-yellow-500 text-blue-100 placeholder:text-blue-300"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-blue-200 mb-2 font-crimson">
             Bio (optional)
           </label>
           <Input
             placeholder="Tell your friends about yourself"
             value={bio}
             onChange={(e) => setBio(e.target.value)}
-            className="bg-white"
+            className="bg-blue-600 border-yellow-500 text-blue-100 placeholder:text-blue-300"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-blue-200 mb-2 font-crimson">
             Organizations
           </label>
           <div className="flex gap-2 mb-2">
@@ -86,15 +86,15 @@ const UserRegistration = ({ onRegister, onCancel, existingUser }: UserRegistrati
               value={newOrg}
               onChange={(e) => setNewOrg(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && addOrganization()}
-              className="bg-white"
+              className="bg-blue-600 border-yellow-500 text-blue-100 placeholder:text-blue-300"
             />
-            <Button onClick={addOrganization} size="sm">
+            <Button onClick={addOrganization} size="sm" className="bg-yellow-500 hover:bg-yellow-600 text-blue-900">
               <Plus className="h-4 w-4" />
             </Button>
           </div>
           <div className="flex flex-wrap gap-2">
             {organizations.map((org) => (
-              <Badge key={org} variant="secondary" className="flex items-center gap-1">
+              <Badge key={org} className="bg-yellow-600 text-blue-900 border border-yellow-500 flex items-center gap-1">
                 {org}
                 <X 
                   className="h-3 w-3 cursor-pointer" 
@@ -109,12 +109,16 @@ const UserRegistration = ({ onRegister, onCancel, existingUser }: UserRegistrati
           <Button 
             onClick={handleSubmit}
             disabled={!name.trim()}
-            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
+            className="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-semibold"
           >
             {existingUser ? "Update Profile" : "Create Account"}
           </Button>
           {onCancel && (
-            <Button variant="outline" onClick={onCancel}>
+            <Button 
+              variant="outline" 
+              onClick={onCancel}
+              className="border-yellow-500 text-yellow-400 hover:bg-yellow-500 hover:text-blue-900"
+            >
               Cancel
             </Button>
           )}

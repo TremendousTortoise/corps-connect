@@ -46,10 +46,10 @@ const ActivitySuggestions = ({ currentUser, visits, suggestions, onAddSuggestion
 
   if (activeVisits.length === 0) {
     return (
-      <Card>
+      <Card className="border-2 border-yellow-500 bg-blue-700">
         <CardContent className="text-center py-8">
-          <Calendar className="h-12 w-12 text-gray-300 mx-auto mb-2" />
-          <p className="text-gray-500">No active visits to suggest activities for</p>
+          <Calendar className="h-12 w-12 text-yellow-400 mx-auto mb-2" />
+          <p className="text-blue-200">No active visits to suggest activities for</p>
         </CardContent>
       </Card>
     );
@@ -61,18 +61,18 @@ const ActivitySuggestions = ({ currentUser, visits, suggestions, onAddSuggestion
         const visitSuggestions = suggestions.filter(s => s.visitId === visit.id);
         
         return (
-          <Card key={visit.id}>
+          <Card key={visit.id} className="border-2 border-yellow-500 bg-blue-700">
             <CardHeader>
               <CardTitle className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <Avatar className="h-8 w-8">
-                    <AvatarFallback className="bg-blue-500 text-white text-sm">
+                    <AvatarFallback className="bg-yellow-500 text-blue-900 text-sm font-bold">
                       {getInitials(visit.userName)}
                     </AvatarFallback>
                   </Avatar>
                   <div>
-                    <div className="text-lg">{visit.userName}'s visit</div>
-                    <div className="text-sm text-gray-600">
+                    <div className="text-lg text-yellow-400 font-crimson">{visit.userName}'s visit</div>
+                    <div className="text-sm text-blue-200">
                       {visit.status === 'current' ? 'Currently in town' : 
                        `${visit.startDate.toLocaleDateString()}${visit.endDate ? ` - ${visit.endDate.toLocaleDateString()}` : ''}`}
                     </div>
@@ -82,7 +82,7 @@ const ActivitySuggestions = ({ currentUser, visits, suggestions, onAddSuggestion
                   <Button 
                     size="sm" 
                     onClick={() => setShowForm(visit.id)}
-                    className="bg-purple-500 hover:bg-purple-600"
+                    className="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-semibold"
                   >
                     <Plus className="h-4 w-4 mr-1" />
                     Suggest Activity
@@ -92,14 +92,14 @@ const ActivitySuggestions = ({ currentUser, visits, suggestions, onAddSuggestion
             </CardHeader>
             <CardContent className="space-y-4">
               {showForm === visit.id && (
-                <div className="bg-purple-50 p-4 rounded-lg border-2 border-purple-200">
+                <div className="bg-blue-600 p-4 rounded border-2 border-yellow-500">
                   <div className="space-y-3">
                     <div>
                       <Input
                         placeholder="Activity title"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
-                        className="bg-white"
+                        className="bg-blue-700 border-yellow-500 text-blue-100 placeholder:text-blue-300"
                       />
                     </div>
                     <div>
@@ -107,7 +107,7 @@ const ActivitySuggestions = ({ currentUser, visits, suggestions, onAddSuggestion
                         placeholder="Description and details"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                        className="bg-white"
+                        className="bg-blue-700 border-yellow-500 text-blue-100 placeholder:text-blue-300"
                       />
                     </div>
                     <div>
@@ -115,7 +115,7 @@ const ActivitySuggestions = ({ currentUser, visits, suggestions, onAddSuggestion
                         type="date"
                         value={suggestedDate}
                         onChange={(e) => setSuggestedDate(e.target.value)}
-                        className="bg-white"
+                        className="bg-blue-700 border-yellow-500 text-blue-100"
                       />
                     </div>
                     <div className="flex gap-2">
@@ -123,6 +123,7 @@ const ActivitySuggestions = ({ currentUser, visits, suggestions, onAddSuggestion
                         onClick={() => handleSubmit(visit.id)}
                         disabled={!title.trim() || !description.trim()}
                         size="sm"
+                        className="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-semibold"
                       >
                         Add Suggestion
                       </Button>
@@ -130,6 +131,7 @@ const ActivitySuggestions = ({ currentUser, visits, suggestions, onAddSuggestion
                         variant="outline" 
                         onClick={() => setShowForm(null)}
                         size="sm"
+                        className="border-yellow-500 text-yellow-400 hover:bg-yellow-500 hover:text-blue-900"
                       >
                         Cancel
                       </Button>
@@ -140,24 +142,24 @@ const ActivitySuggestions = ({ currentUser, visits, suggestions, onAddSuggestion
 
               {visitSuggestions.length > 0 ? (
                 <div className="space-y-3">
-                  <h4 className="font-medium text-gray-700">Activity Suggestions:</h4>
+                  <h4 className="font-medium text-blue-200 font-crimson">Activity Suggestions:</h4>
                   {visitSuggestions.map((suggestion) => (
-                    <div key={suggestion.id} className="bg-gray-50 p-3 rounded border">
+                    <div key={suggestion.id} className="bg-blue-600 p-3 rounded border border-yellow-500">
                       <div className="flex items-start gap-3">
                         <Avatar className="h-6 w-6">
-                          <AvatarFallback className="bg-purple-500 text-white text-xs">
+                          <AvatarFallback className="bg-yellow-500 text-blue-900 text-xs font-bold">
                             {getInitials(suggestion.userName)}
                           </AvatarFallback>
                         </Avatar>
                         <div className="flex-1">
-                          <div className="font-medium">{suggestion.title}</div>
-                          <div className="text-sm text-gray-600">{suggestion.description}</div>
+                          <div className="font-medium text-yellow-400">{suggestion.title}</div>
+                          <div className="text-sm text-blue-200">{suggestion.description}</div>
                           {suggestion.suggestedDate && (
-                            <div className="text-xs text-gray-500 mt-1">
+                            <div className="text-xs text-blue-300 mt-1">
                               Suggested for: {suggestion.suggestedDate.toLocaleDateString()}
                             </div>
                           )}
-                          <div className="text-xs text-gray-400 mt-1">
+                          <div className="text-xs text-blue-400 mt-1">
                             Suggested by {suggestion.userName}
                           </div>
                         </div>
@@ -166,7 +168,7 @@ const ActivitySuggestions = ({ currentUser, visits, suggestions, onAddSuggestion
                   ))}
                 </div>
               ) : (
-                <div className="text-center text-gray-500 py-4">
+                <div className="text-center text-blue-200 py-4">
                   No activity suggestions yet
                 </div>
               )}

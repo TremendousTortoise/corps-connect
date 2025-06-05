@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Users, Calendar } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -145,41 +144,41 @@ const Index = () => {
   const upcomingVisits = visits.filter(v => v.status === 'planned');
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <div className="min-h-screen bg-blue-800">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl">
-              <Users className="h-8 w-8 text-white" />
+            <div className="p-3 bg-yellow-500 rounded border-2 border-yellow-600">
+              <Users className="h-8 w-8 text-blue-900" />
             </div>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              FriendConnect
+            <h1 className="text-5xl font-bold text-yellow-400 font-crimson">
+              CorpsConnect
             </h1>
           </div>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Stay connected with your friend group. Plan visits, see who's in town, and suggest activities!
+          <p className="text-xl text-blue-100 max-w-2xl mx-auto font-crimson">
+            Connect with your corps. Plan visits, see who's in town, and coordinate activities.
           </p>
         </div>
 
         {/* Current User Status */}
         {currentUser && (
-          <Card className="mb-8 border-2 border-green-200 bg-green-50">
+          <Card className="mb-8 border-2 border-yellow-500 bg-blue-700">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   <Avatar className="h-12 w-12">
-                    <AvatarFallback className="bg-green-500 text-white">
+                    <AvatarFallback className="bg-yellow-500 text-blue-900 font-bold">
                       {getInitials(currentUser.name)}
                     </AvatarFallback>
                   </Avatar>
                   <div>
-                    <div className="font-semibold text-green-800">
+                    <div className="font-semibold text-yellow-400 font-crimson text-lg">
                       Welcome back, {currentUser.name}!
                     </div>
                     <div className="flex flex-wrap gap-1 mt-1">
                       {currentUser.organizations.map((org) => (
-                        <Badge key={org} variant="secondary" className="text-xs">
+                        <Badge key={org} className="bg-yellow-600 text-blue-900 text-xs border border-yellow-500">
                           {org}
                         </Badge>
                       ))}
@@ -190,14 +189,14 @@ const Index = () => {
                   <Button 
                     variant="outline" 
                     onClick={() => setIsRegistering(true)}
-                    className="border-green-600 text-green-600 hover:bg-green-50"
+                    className="border-yellow-500 text-yellow-400 hover:bg-yellow-500 hover:text-blue-900"
                   >
                     Edit Profile
                   </Button>
                   <Button 
                     variant="outline" 
                     onClick={handleLogout}
-                    className="border-red-600 text-red-600 hover:bg-red-50"
+                    className="border-red-400 text-red-400 hover:bg-red-400 hover:text-white"
                   >
                     Logout
                   </Button>
@@ -232,28 +231,28 @@ const Index = () => {
 
             {/* Who's in Town */}
             <div className="grid lg:grid-cols-2 gap-6 mb-8">
-              <Card>
+              <Card className="border-2 border-yellow-500 bg-blue-700">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
+                  <CardTitle className="flex items-center gap-2 text-yellow-400 font-crimson">
                     <Users className="h-5 w-5" />
                     Currently in Town ({currentVisits.length})
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   {currentVisits.length === 0 ? (
-                    <p className="text-gray-500 text-center py-4">No one is currently in town</p>
+                    <p className="text-blue-200 text-center py-4">No one is currently in town</p>
                   ) : (
                     <div className="space-y-3">
                       {currentVisits.map((visit) => (
-                        <div key={visit.id} className="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
+                        <div key={visit.id} className="flex items-center gap-3 p-3 bg-blue-600 rounded border border-yellow-500">
                           <Avatar className="h-8 w-8">
-                            <AvatarFallback className="bg-green-500 text-white">
+                            <AvatarFallback className="bg-yellow-500 text-blue-900 font-bold">
                               {getInitials(visit.userName)}
                             </AvatarFallback>
                           </Avatar>
                           <div>
-                            <div className="font-medium">{visit.userName}</div>
-                            <div className="text-sm text-gray-600">Since {visit.startDate.toLocaleDateString()}</div>
+                            <div className="font-medium text-yellow-400">{visit.userName}</div>
+                            <div className="text-sm text-blue-200">Since {visit.startDate.toLocaleDateString()}</div>
                           </div>
                         </div>
                       ))}
@@ -262,28 +261,28 @@ const Index = () => {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="border-2 border-yellow-500 bg-blue-700">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
+                  <CardTitle className="flex items-center gap-2 text-yellow-400 font-crimson">
                     <Calendar className="h-5 w-5" />
                     Upcoming Visits ({upcomingVisits.length})
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   {upcomingVisits.length === 0 ? (
-                    <p className="text-gray-500 text-center py-4">No upcoming visits planned</p>
+                    <p className="text-blue-200 text-center py-4">No upcoming visits planned</p>
                   ) : (
                     <div className="space-y-3">
                       {upcomingVisits.slice(0, 5).map((visit) => (
-                        <div key={visit.id} className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
+                        <div key={visit.id} className="flex items-center gap-3 p-3 bg-blue-600 rounded border border-yellow-500">
                           <Avatar className="h-8 w-8">
-                            <AvatarFallback className="bg-blue-500 text-white">
+                            <AvatarFallback className="bg-yellow-500 text-blue-900 font-bold">
                               {getInitials(visit.userName)}
                             </AvatarFallback>
                           </Avatar>
                           <div>
-                            <div className="font-medium">{visit.userName}</div>
-                            <div className="text-sm text-gray-600">
+                            <div className="font-medium text-yellow-400">{visit.userName}</div>
+                            <div className="text-sm text-blue-200">
                               {visit.startDate.toLocaleDateString()}
                               {visit.endDate && ` - ${visit.endDate.toLocaleDateString()}`}
                             </div>
@@ -298,7 +297,7 @@ const Index = () => {
 
             {/* Activity Suggestions */}
             <div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">Activity Suggestions</h2>
+              <h2 className="text-2xl font-bold text-yellow-400 mb-4 font-crimson">Activity Suggestions</h2>
               <ActivitySuggestions 
                 currentUser={currentUser}
                 visits={visits}

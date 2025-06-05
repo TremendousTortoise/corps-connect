@@ -56,9 +56,9 @@ const VisitPlanner = ({ currentUser, visits, onAddVisit, onUpdateVisit }: VisitP
   };
 
   return (
-    <Card className="border-2 border-green-200 bg-green-50">
+    <Card className="border-2 border-yellow-500 bg-blue-700">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-green-800">
+        <CardTitle className="flex items-center gap-2 text-yellow-400 font-crimson">
           <MapPin className="h-6 w-6" />
           Your Visits
         </CardTitle>
@@ -66,13 +66,13 @@ const VisitPlanner = ({ currentUser, visits, onAddVisit, onUpdateVisit }: VisitP
       <CardContent className="space-y-4">
         {currentVisit ? (
           <div className="text-center">
-            <Badge className="bg-green-500 text-white text-lg px-4 py-2">
+            <Badge className="bg-yellow-500 text-blue-900 text-lg px-4 py-2 font-semibold">
               Currently in town!
             </Badge>
             <Button 
               onClick={handleMarkInTown}
               variant="outline"
-              className="mt-2 block mx-auto border-green-600 text-green-600"
+              className="mt-2 block mx-auto border-yellow-500 text-yellow-400 hover:bg-yellow-500 hover:text-blue-900"
             >
               Mark as left town
             </Button>
@@ -81,18 +81,18 @@ const VisitPlanner = ({ currentUser, visits, onAddVisit, onUpdateVisit }: VisitP
           <Button 
             onClick={handleMarkInTown}
             size="lg"
-            className="w-full bg-green-500 hover:bg-green-600 text-white text-lg py-6"
+            className="w-full bg-yellow-500 hover:bg-yellow-600 text-blue-900 text-lg py-6 font-bold"
           >
             I'm in town now!
           </Button>
         )}
 
-        <div className="border-t pt-4">
+        <div className="border-t border-yellow-500 pt-4">
           {!showPlanner ? (
             <Button 
               onClick={() => setShowPlanner(true)}
               variant="outline"
-              className="w-full border-blue-500 text-blue-500"
+              className="w-full border-yellow-500 text-yellow-400 hover:bg-yellow-500 hover:text-blue-900"
             >
               <Calendar className="h-4 w-4 mr-2" />
               Plan a visit
@@ -101,44 +101,52 @@ const VisitPlanner = ({ currentUser, visits, onAddVisit, onUpdateVisit }: VisitP
             <div className="space-y-3">
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-blue-200 mb-1 font-crimson">
                     Start Date *
                   </label>
                   <Input
                     type="date"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
-                    className="bg-white"
+                    className="bg-blue-600 border-yellow-500 text-blue-100"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-blue-200 mb-1 font-crimson">
                     End Date
                   </label>
                   <Input
                     type="date"
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
-                    className="bg-white"
+                    className="bg-blue-600 border-yellow-500 text-blue-100"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-blue-200 mb-1 font-crimson">
                   Notes
                 </label>
                 <Input
                   placeholder="Any details about your visit..."
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  className="bg-white"
+                  className="bg-blue-600 border-yellow-500 text-blue-100 placeholder:text-blue-300"
                 />
               </div>
               <div className="flex gap-2">
-                <Button onClick={handlePlanVisit} disabled={!startDate}>
+                <Button 
+                  onClick={handlePlanVisit} 
+                  disabled={!startDate}
+                  className="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-semibold"
+                >
                   Plan Visit
                 </Button>
-                <Button variant="outline" onClick={() => setShowPlanner(false)}>
+                <Button 
+                  variant="outline" 
+                  onClick={() => setShowPlanner(false)}
+                  className="border-yellow-500 text-yellow-400 hover:bg-yellow-500 hover:text-blue-900"
+                >
                   Cancel
                 </Button>
               </div>
@@ -147,19 +155,19 @@ const VisitPlanner = ({ currentUser, visits, onAddVisit, onUpdateVisit }: VisitP
         </div>
 
         {userVisits.length > 0 && (
-          <div className="border-t pt-4">
-            <h4 className="font-medium text-gray-700 mb-2">Your planned visits:</h4>
+          <div className="border-t border-yellow-500 pt-4">
+            <h4 className="font-medium text-blue-200 mb-2 font-crimson">Your planned visits:</h4>
             <div className="space-y-2">
               {userVisits.filter(v => v.status === 'planned').map((visit) => (
-                <div key={visit.id} className="bg-white p-3 rounded border flex items-center gap-2">
-                  <Clock className="h-4 w-4 text-gray-500" />
+                <div key={visit.id} className="bg-blue-600 p-3 rounded border border-yellow-500 flex items-center gap-2">
+                  <Clock className="h-4 w-4 text-yellow-400" />
                   <div className="flex-1">
-                    <div className="text-sm font-medium">
+                    <div className="text-sm font-medium text-yellow-400">
                       {visit.startDate.toLocaleDateString()}
                       {visit.endDate && ` - ${visit.endDate.toLocaleDateString()}`}
                     </div>
                     {visit.notes && (
-                      <div className="text-sm text-gray-600">{visit.notes}</div>
+                      <div className="text-sm text-blue-200">{visit.notes}</div>
                     )}
                   </div>
                 </div>
